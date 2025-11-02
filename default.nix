@@ -1,6 +1,7 @@
 {
   pkgs ? import <nixpkgs> {},
-  lib,
+  lib ? pkgs.lib,
+  ...
 }:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "hyprcorners";
@@ -10,21 +11,15 @@ pkgs.rustPlatform.buildRustPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "ArnoDarkrose";
     repo = "hyprcorners";
-    rev = "0.1.0"; # Commit, Tag oder Branch
-    sha256 = "sha256-IF8RmE29r8q758km7k+4Z/6rhjlr8ll88wYLyBXmfWA="; # Hier nix-hash eintragen
+    rev = "97c9b78243f0d8716bb93d390cad46611a3eb32a";
+    sha256 = "sha256-Wk5lAMmb+caXo8mZTApOpuQia0zEVuZOrhGdL8rUrpQ="; # Hier nix-hash eintragen
   };
 
-  cargoHash = "sha256-92L4qaAvy5F93UabbgPv+qAvx+WxOdEhcP1WXAYAEvI=";
-
-  # Installiere die Binary systemweit
-  installPhase = ''
-    mkdir -p $out/bin
-    cp target/x86_64-unknown-linux-gnu/release/hot-corners $out/bin/hyprcorners
-  '';
+  cargoHash = "sha256-zQbd1j77kbE+ZJTx7HfnESLrKOy7JVtRYuUSv8iyT7w=";
 
   meta = with pkgs.lib; {
     description = "My Rust binary from GitHub";
     license = licenses.mit;
-    maintainers = with maintainers; ["Paulemeister"];
+    maintainers = ["Paulemeister"];
   };
 }
